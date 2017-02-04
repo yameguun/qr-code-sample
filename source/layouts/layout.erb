@@ -6,14 +6,61 @@
     <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
 
     <!-- Use title if it's in the page YAML frontmatter -->
-    <title><%= current_page.data.title || "Middleman" %></title>
+    <title><%= current_page.data.title %></title>
 
     <link href='//fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
 
-    <%= stylesheet_link_tag :site %>
-    <%= javascript_include_tag :all %>
-  </head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <%= stylesheet_link_tag 'layout' %>
+
+    <%= javascript_include_tag "jquery-2.1.1.min.js" %>
+    <%= javascript_include_tag "qrcode/megapix-image.js" %>
+    <%= javascript_include_tag "qrcode/grid.js" %>
+    <%= javascript_include_tag "qrcode/version.js" %>
+    <%= javascript_include_tag "qrcode/detector.js" %>
+    <%= javascript_include_tag "qrcode/formatinf.js" %>
+    <%= javascript_include_tag "qrcode/errorlevel.js" %>
+    <%= javascript_include_tag "qrcode/bitmat.js" %>
+    <%= javascript_include_tag "qrcode/datablock.js" %>
+    <%= javascript_include_tag "qrcode/bmparser.js" %>
+    <%= javascript_include_tag "qrcode/datamask.js" %>
+    <%= javascript_include_tag "qrcode/rsdecoder.js" %>
+    <%= javascript_include_tag "qrcode/gf256poly.js" %>
+    <%= javascript_include_tag "qrcode/gf256.js" %>
+    <%= javascript_include_tag "qrcode/decoder.js" %>
+    <%= javascript_include_tag "qrcode/qrcode.js" %>
+    <%= javascript_include_tag "qrcode/findpat.js" %>
+    <%= javascript_include_tag "qrcode/alignpat.js" %>
+    <%= javascript_include_tag "qrcode/databr.js" %>
+    <%= javascript_include_tag "qrcode/binarization.js" %>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script>
+    $(document).ready(function() {
+      var info = $('#info');
+      var result = $('#result');
+      qrcode.callback = function(res) {
+        if (res == 'error decoding QR Code') {
+          result.text('QRコードの解析に失敗');
+        } else if (isURL(res)) {
+          result.html('<a target="_blank" href="'+res+'">' + res + '</a>');
+        } else {
+          result.text(res);
+        }
+      };
+      $('#file').change(function(e) {
+        loadImage('file');
+      });
+    });
+    </script>
+  </head>
   <body class="<%= page_classes %>">
     <%= yield %>
   </body>

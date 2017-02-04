@@ -1,13 +1,15 @@
 ---
-title: Welcome to Middleman
+title: QR読み取りサンプル
 ---
+<div class="container">
+  <h1>QR読み取りサンプル</h1>
 
-<div class="welcome">
-  <div class="logo">
-    <%= image_tag "middleman-logo.svg" %>
+  <div class="row">
+    <div class="col-lg-12">
+      <input type="file" id="file">
+      <p id="result"></p>
+      <canvas id="qr-canvas"></canvas>
+    </div>
   </div>
-  <h1>Middleman is Running</h1>
-  <p class="doc">
-    <%= link_to "Read Documentation Online", "https://middlemanapp.com", target: "_blank" %>
-  </p><!-- .doc -->
-</div><!-- .welcome -->
+
+</div>
